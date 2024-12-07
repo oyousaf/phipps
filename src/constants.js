@@ -6,8 +6,9 @@ export const NAV_LINKS = [
   { name: "Contact", href: "contact" },
 ];
 
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaPhone } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
 
 export const SOCIAL_LINKS = [
   {
@@ -24,6 +25,16 @@ export const SOCIAL_LINKS = [
     platform: "Twitter",
     href: "https://x.com/PhippsOpticians",
     icon: <BsTwitterX size={30} />,
+  },
+  {
+    platform: "Email",
+    href: "mailto:phippsoptheckie@hotmail.co.uk",
+    icon: <MdEmail size={30} />,
+  },
+  {
+    platform: "Phone",
+    href: "tel:+441924409334",
+    icon: <FaPhone size={30} />,
   },
 ];
 
