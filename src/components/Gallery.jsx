@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GALLERY } from "@/constants";
+import Image from "next/image";
 
 const Gallery = () => {
   return (
@@ -16,9 +17,11 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <img
+              <Image
                 src={item.href}
                 alt={`Gallery Image ${item.id}`}
+                width={500} 
+                height={500}
                 className="w-full h-full object-cover"
               />
             </motion.div>

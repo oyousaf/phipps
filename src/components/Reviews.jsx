@@ -32,7 +32,7 @@ const Reviews = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.2 }}
             >
-              <p className="italic">"{t.review}"</p>
+              <p className="italic">&quot;{t.review}&quot;</p>
               <p className="mt-4 font-semibold text-xl">- {t.name}</p>
             </motion.div>
           ))}
