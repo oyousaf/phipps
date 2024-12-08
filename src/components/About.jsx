@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Gallery from "./Gallery";
 
-import { TILES } from "../constants";
+import { TILES } from "@/constants";
 
 const About = () => {
   return (

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV_LINKS, SOCIAL_LINKS } from "../constants";
+import { NAV_LINKS, SOCIAL_LINKS } from "@/constants";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
 
 const Navbar = () => {
