@@ -5,6 +5,7 @@ import Services from "@/components/Services";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
+import ScrollToTop from "@/components/ScrollToTop";
 import Snow from "@/components/Snow";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <Reviews />
       <Contact />
       <Footer />
+      <ScrollToTop />
       <Snow />
     </>
   );
