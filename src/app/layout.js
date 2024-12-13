@@ -3,7 +3,7 @@ import "./globals.css";
 export const metadata = {
   title: "Phipps Opticians - Trusted Opticians in Heckmondwike, West Yorkshire",
   description:
-    "Phipps Opticians is your locally trusted, independent family opticians in Heckmondwike, West Yorkshire. We offer personalized eye care services, quality eyewear, and a welcoming experience.",
+    "Phipps Opticians is your locally trusted, independent family opticians in Heckmondwike, West Yorkshire. We offer personalised eye care services, quality eyewear, and unparalleled service.",
   keywords:
     "opticians, family opticians, Heckmondwike opticians, eye care, eyewear, independent opticians, West Yorkshire opticians",
   icons: {
