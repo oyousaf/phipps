@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "Phipps Opticians | Trusted Opticians in Heckmondwike, West Yorkshire",
@@ -69,7 +70,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-GB">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
