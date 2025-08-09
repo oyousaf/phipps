@@ -1,6 +1,32 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Optician",
+  name: "Phipps Opticians",
+  url: "https://phippsopticians.uk",
+  logo: "https://phippsopticians.uk/favicon.ico",
+  image: "https://phippsopticians.uk/images/hero.jpg",
+  description:
+    "Discover expert eye care and a wide range of eyewear at Phipps Opticians in Heckmondwike, West Yorkshire. Book an appointment with our trusted family opticians today.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "63 Market Place",
+    addressLocality: "Heckmondwike",
+    addressRegion: "West Yorkshire",
+    postalCode: "WF16 0EZ",
+    addressCountry: "GB",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 53.707038810053874,
+    longitude: -1.6747588134919713,
+  },
+  telephone: "+44 1924 409334",
+  sameAs: [],
+};
+
 export const metadata = {
   title: "Phipps Opticians | Trusted Opticians in Heckmondwike, West Yorkshire",
   description:
@@ -51,26 +77,21 @@ export const metadata = {
       "Your trusted family opticians in Heckmondwike, West Yorkshire, providing exemplary eye care and unparalleled service.",
     images: ["https://phippsopticians.uk/images/hero.jpg"],
   },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "63 Market Place",
-    addressLocality: "Heckmondwike",
-    addressRegion: "West Yorkshire",
-    postalCode: "WF16 0EZ",
-    addressCountry: "GB",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 53.707038810053874,
-    longitude: -1.6747588134919713,
-  },
-  telephone: "+44 1924 409334",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en-GB">
+      <head>
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body>
+        {/* SEO-friendly hidden heading */}
+        <h1 className="sr-only">Phipps Opticians</h1>
         {children}
         <Analytics />
       </body>
