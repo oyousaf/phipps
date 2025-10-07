@@ -13,7 +13,7 @@ import WhatsAppBubble from "@/components/WhatsappBubble";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-// 🧭 SEO + Metadata from Phipps Opticians
+// 🧭 SEO + Metadata
 export const metadata: Metadata = {
   metadataBase: new URL("https://phippsopticians.uk"),
   title:
@@ -82,7 +82,7 @@ export const viewport: Viewport = {
   themeColor: "#0f2f23",
 };
 
-// 🧱 Structured Data from Phipps Opticians
+// 🧱 Structured Data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Optician",
