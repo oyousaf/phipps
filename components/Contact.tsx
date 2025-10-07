@@ -1,20 +1,10 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { trackFormSubmit } from "@/lib/gtag";
-
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (el: HTMLElement, options: Record<string, unknown>) => void;
-    };
-  }
-}
-
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
 
 type ContactFormData = {
   name: string;
@@ -32,62 +22,25 @@ export default function Contact() {
   } = useForm<ContactFormData>();
 
   const [sent, setSent] = useState(false);
-  const [token, setToken] = useState("");
-  const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const widgetRef = useRef<HTMLDivElement | null>(null);
-
-  // Lazy-load Turnstile
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !scriptLoaded) {
-          const script = document.createElement("script");
-          script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => {
-            setScriptLoaded(true);
-            if (window.turnstile && widgetRef.current) {
-              window.turnstile.render(widgetRef.current, {
-                sitekey: TURNSTILE_SITE_KEY,
-                callback: (t: string) => setToken(t),
-              });
-            }
-          };
-          document.body.appendChild(script);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (formRef.current) observer.observe(formRef.current);
-    return () => observer.disconnect();
-  }, [scriptLoaded]);
-
-  // Handle form submission
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
-    if (data.website) return; // honeypot
-    if (!token) return toast.error("Please complete the verification.");
+    if (data.website) return; // honeypot (spam trap)
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, token }),
+        body: JSON.stringify(data),
       });
 
       if (!res.ok) throw new Error("Failed to send message");
 
-      // 🔥 Unified GA4 + Ads conversion tracking
+      // ✅ GA tracking event
       trackFormSubmit();
 
       toast.success("Message sent successfully!");
       setSent(true);
       reset();
-      setToken("");
       setTimeout(() => setSent(false), 3000);
     } catch {
       toast.error("Something went wrong. Please try again.");
@@ -113,6 +66,7 @@ export default function Contact() {
       >
         Let’s Build Something Remarkable
       </motion.h2>
+
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +80,6 @@ export default function Contact() {
 
       {/* Contact form */}
       <form
-        ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-xl mx-auto grid gap-4 text-left"
         aria-label="Contact Form"
@@ -196,9 +149,6 @@ export default function Contact() {
             <span className="text-red-400 text-sm">Message is required</span>
           )}
         </motion.div>
-
-        {/* Turnstile */}
-        <div ref={widgetRef} className="text-center min-h-[70px]" />
 
         {/* Submit button */}
         <motion.button
